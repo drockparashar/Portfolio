@@ -62,6 +62,13 @@ const App = () => {
 
   const projects = [
     {
+      title: "Secure Call",
+      description: "Effortlessly secure your conversations with real-time voice calling, cloud recording, and AI-powered scam detection.",
+      tech: ["WebRTC", "Socket.IO", "FFmpeg", "Cloudinary", "Google Speech-to-Text","Fine-tuned BERT"],
+      github: "https://github.com/drockparashar/git-deployer",
+      gradient: "from-emerald-500 via-teal-400 to-cyan-300",
+    },
+    {
       title: "Farm Automation System",
       description:
         "IoT-driven polyhouse management with realtime monitoring for crop-specific optimization.",
@@ -91,6 +98,30 @@ const App = () => {
       gradient: "from-emerald-500 via-teal-400 to-cyan-300",
     },
   ];
+
+  const techStack = [
+    { tech: "Express.js", Icon: SiExpress },
+    { tech: "MongoDB", Icon: SiMongodb },
+    { tech: "Firebase Firestore", Icon: SiFirebase },
+    { tech: "InfluxDB", Icon: SiInfluxdb },
+    { tech: "Raspberry Pi", Icon: SiRaspberrypi },
+    { tech: "ESP32", Icon: SiEspressif },
+    { tech: "React Native", Icon: SiReact },
+    { tech: "Next.js", Icon: SiNextdotjs },
+    { tech: "TypeScript", Icon: SiTypescript },
+    { tech: "Tailwind CSS", Icon: SiTailwindcss },
+    { tech: "Socket.IO", Icon: SiSocketdotio },
+    { tech: "Docker", Icon: SiDocker },
+    { tech: "AWS Lambda", Icon: SiAwslambda },
+    { tech: "TensorFlow", Icon: SiTensorflow },
+    { tech: "Prisma ORM", Icon: SiPrisma },
+    { tech: "Node.js", Icon: SiNodedotjs },
+    { tech: "Redux", Icon: SiRedux },
+    { tech: "GraphQL", Icon: SiGraphql }
+  ];
+
+  // Duplicate the array to create seamless infinite scroll
+  const duplicatedTechStack = [...techStack, ...techStack];
 
   const phrases = [
     "Frontend Developer",
@@ -426,66 +457,79 @@ const App = () => {
         </div>
       </section>
 
-      {/* Tech Stack Section */}
-      <section id="tech-stack" className="py-20 relative">
-        <div
-          className={`absolute inset-0 ${
-            isDarkMode ? "bg-black" : "bg-gray-100"
-          }`}
-        />
-        <div className="container mx-auto px-4 relative">
-          <h2 className="font-space-grotesk text-4xl font-bold mb-12 flex items-center justify-center tracking-tight">
-            <TerminalIcon className="mr-4 h-8 w-8 text-blue-400" />
-            Tech Stack
-          </h2>
-          <div className="flex flex-wrap justify-center gap-4 sm:gap-8">
-            {[
-              { tech: "Express.js", Icon: SiExpress },
-              { tech: "MongoDB", Icon: SiMongodb },
-              { tech: "Firebase Firestore", Icon: SiFirebase },
-              { tech: "InfluxDB", Icon: SiInfluxdb },
-              { tech: "Raspberry Pi", Icon: SiRaspberrypi },
-              { tech: "ESP32", Icon: SiEspressif },
-              { tech: "React Native", Icon: SiReact },
-              { tech: "Next.js", Icon: SiNextdotjs },
-              { tech: "TypeScript", Icon: SiTypescript },
-              { tech: "Tailwind CSS", Icon: SiTailwindcss },
-              { tech: "Socket.IO", Icon: SiSocketdotio },
-              { tech: "Docker", Icon: SiDocker },
-              { tech: "AWS Lambda", Icon: SiAwslambda },
-              { tech: "TensorFlow", Icon: SiTensorflow },
-              { tech: "Prisma ORM", Icon: SiPrisma },
-              { tech: "Node.js", Icon: SiNodedotjs },
-              { tech: "Redux", Icon: SiRedux },
-              { tech: "GraphQL", Icon: SiGraphql },
-            ].map(({ tech, Icon }) => (
-              <div
-                key={tech}
-                className={`font-inter group flex items-center gap-2 sm:gap-4 p-2 sm:p-3 rounded-lg border ${
-                  isDarkMode
-                    ? "border-gray-800 hover:border-gray-600"
-                    : "border-gray-200 hover:border-gray-400"
-                } transition-all duration-300 hover:bg-white/5 w-[calc(50%-1rem)] sm:w-auto`}
-              >
-                <Icon
-                  className={`h-5 w-5 sm:h-6 sm:w-6 ${
-                    isDarkMode ? "text-gray-400" : "text-gray-600"
-                  } group-hover:text-blue-400 transition-colors duration-300`}
-                />
-                <span
-                  className={`text-sm sm:text-base ${
-                    isDarkMode
-                      ? "text-gray-300 group-hover:text-white"
-                      : "text-gray-700 group-hover:text-gray-900"
+      <section id="tech-stack" className="py-20 relative overflow-hidden">
+  <div className={`absolute inset-0 ${isDarkMode ? "bg-black" : "bg-gray-100"}`} />
+  <div className="container mx-auto px-4 relative">
+    <h2 className="font-space-grotesk text-4xl font-bold mb-12 flex items-center justify-center tracking-tight">
+      <TerminalIcon className="mr-4 h-8 w-8 text-blue-400" />
+      Tech Stack
+    </h2>
+    
+    <div className="relative overflow-hidden space-y-8">
+      {/* First row - Left to Right */}
+      <div className="relative overflow-hidden py-4">
+        <div className="flex animate-scroll-left">
+          {[...techStack, ...techStack].map((item, index) => (
+            <div
+              key={`forward-${index}`}
+              className={`flex-shrink-0 font-inter group flex items-center gap-2 p-3 rounded-lg border mx-2 
+                ${isDarkMode 
+                  ? "border-gray-800 hover:border-gray-600" 
+                  : "border-gray-200 hover:border-gray-400"
+                } transition-all duration-300 hover:bg-white/5`}
+            >
+              <item.Icon
+                className={`h-6 w-6 
+                  ${isDarkMode ? "text-gray-400" : "text-gray-600"}
+                  group-hover:text-blue-400 transition-colors duration-300`}
+              />
+              <span
+                className={`text-base whitespace-nowrap
+                  ${isDarkMode
+                    ? "text-gray-300 group-hover:text-white"
+                    : "text-gray-700 group-hover:text-gray-900"
                   } transition-colors duration-300 font-light`}
-                >
-                  {tech}
-                </span>
-              </div>
-            ))}
-          </div>
+              >
+                {item.tech}
+              </span>
+            </div>
+          ))}
         </div>
-      </section>
+      </div>
+
+      {/* Second row - Right to Left */}
+      <div className="relative overflow-hidden py-4">
+        <div className="flex animate-scroll-right">
+          {[...techStack, ...techStack].reverse().map((item, index) => (
+            <div
+              key={`reverse-${index}`}
+              className={`flex-shrink-0 font-inter group flex items-center gap-2 p-3 rounded-lg border mx-2 
+                ${isDarkMode 
+                  ? "border-gray-800 hover:border-gray-600" 
+                  : "border-gray-200 hover:border-gray-400"
+                } transition-all duration-300 hover:bg-white/5`}
+            >
+              <item.Icon
+                className={`h-6 w-6 
+                  ${isDarkMode ? "text-gray-400" : "text-gray-600"}
+                  group-hover:text-blue-400 transition-colors duration-300`}
+              />
+              <span
+                className={`text-base whitespace-nowrap
+                  ${isDarkMode
+                    ? "text-gray-300 group-hover:text-white"
+                    : "text-gray-700 group-hover:text-gray-900"
+                  } transition-colors duration-300 font-light`}
+              >
+                {item.tech}
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
     </div>
   );
 };
