@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import RotatingText from "./effects/floatingText";
 import {
   AcademicCapIcon,
   ArrowUpIcon,
@@ -35,7 +36,8 @@ import {
   FaTwitter,
   FaInstagram,
   FaEye,
-  FaProjectDiagram
+  FaProjectDiagram,
+  FaUserAstronaut,
 } from "react-icons/fa";
 
 const App = () => {
@@ -62,68 +64,31 @@ const App = () => {
         "SnippetCove is a full-stack code snippet sharing platform enabling developers to discover, save, and share reusable code snippets across multiple programming languages with user profiles, activity tracking, and responsive design",
       tech: ["Next.js", "Node.js", "OAuth"],
       github: "https://github.com/drockparashar/snippetCove",
-      liveUrl: "https://snippet-cove.vercel.app/", // Add your live project URL here
-      image: "/SnippetCove.png", // Add your project image path here
+      liveUrl: "https://snippet-cove.vercel.app/",
+      image: "/SnippetCove.png",
       gradient: "from-green-500 via-blue-400 to-purple-500",
     },
     {
       title: "Test Me",
-      description: "Test Me is an AI-powered personalized learning platform designed to help students practice and improve their knowledge through dynamic tests and performance analytics. It leverages modern web technologies and AI to create an engaging and adaptive educational experience.",
-      tech: ["Node.js", "Gemini", "Express.js","Recharts.js"],
+      description:
+        "Test Me is an AI-powered personalized learning platform designed to help students practice and improve their knowledge through dynamic tests and performance analytics. It leverages modern web technologies and AI to create an engaging and adaptive educational experience.",
+      tech: ["Node.js", "Gemini", "Express.js", "Recharts.js"],
       github: "https://github.com/drockparashar/test-me",
-      liveUrl: "https://test-me-eta.vercel.app/", // Add your live project URL here
-      image: "/TestMe.png", // Add your project image path here
+      liveUrl: "https://test-me-eta.vercel.app/",
+      image: "/TestMe.png",
       gradient: "from-green-500 via-blue-400 to-purple-500",
     },
     {
       title: "RecapTube Chrome Extension",
-      description: "RecapTube is a Chrome extension that summarizes YouTube video transcripts. It allows you to quickly get a summary of a video without watching the entire content.",
+      description:
+        "RecapTube is a Chrome extension that summarizes YouTube video transcripts. It allows you to quickly get a summary of a video without watching the entire content.",
       tech: ["Node.js", "Express.js", "Gemini"],
       github: "https://github.com/drockparashar/recapTube-extension",
-      liveUrl: "https://github.com/drockparashar/recapTube-extension", // Add your live project URL here
-      image: "/RecapTube.png", // Add your project image path here
+      liveUrl: "https://github.com/drockparashar/recapTube-extension",
+      image: "/RecapTube.png",
       gradient: "from-green-500 via-blue-400 to-purple-500",
     },
   ];
-
-  const phrases = [
-    "Frontend Developer",
-    "Backend Developer",
-    "UI/UX Designer",
-    "Full Stack Developer",
-    "App Developer",
-  ];
-
-  const [currentPhraseIndex, setCurrentPhraseIndex] = useState(0);
-  const [currentText, setCurrentText] = useState("");
-  const [isDeleting, setIsDeleting] = useState(false);
-
-  useEffect(() => {
-    const typeSpeed = 100;
-    const deleteSpeed = 50;
-    const pauseTime = 2000;
-
-    const type = () => {
-      const currentPhrase = phrases[currentPhraseIndex];
-
-      if (isDeleting) {
-        setCurrentText((prev) => prev.slice(0, -1));
-        if (currentText === "") {
-          setIsDeleting(false);
-          setCurrentPhraseIndex((prev) => (prev + 1) % phrases.length);
-        }
-      } else {
-        setCurrentText(currentPhrase.slice(0, currentText.length + 1));
-        if (currentText === currentPhrase) {
-          setTimeout(() => setIsDeleting(true), pauseTime);
-          return;
-        }
-      }
-    };
-
-    const timer = setTimeout(type, isDeleting ? deleteSpeed : typeSpeed);
-    return () => clearTimeout(timer);
-  }, [currentText, isDeleting, currentPhraseIndex]);
 
   const socialLinks = [
     {
@@ -166,7 +131,7 @@ const App = () => {
         isDarkMode
           ? "bg-gradient-to-b from-black via-zinc-900 to-black text-white"
           : "bg-gradient-to-b from-gray-100 via-gray-200 to-gray-100 text-black"
-      } overflow-x-hidden font-inter`}
+      } overflow-x-hidden font-sans`}
     >
       {/* Scroll to top button */}
       {scrollPosition > 500 && (
@@ -200,66 +165,59 @@ const App = () => {
           }`}
         />
 
-        {/* Desktop Social Links - Side */}
-        <div className="hidden lg:flex fixed left-8 top-0 h-full items-center">
-          <div className="flex flex-col items-center gap-8">
-            <div className="w-px h-32 bg-gradient-to-b from-transparent via-gray-500 to-gray-300"></div>
-            {socialLinks.map((social, index) => (
-              <a
-                key={index}
-                href={social.link}
-                className={`group relative p-3 rounded-lg backdrop-blur-sm hover:bg-white/10 transform hover:scale-110 transition-all duration-300`}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={social.tooltip}
-              >
-                <social.icon
-                  className={`h-7 w-7 ${
-                    isDarkMode ? "text-gray-400" : "text-gray-600"
-                  } ${social.color} transition-colors duration-300`}
-                />
-                <span className="absolute left-full ml-3 px-3 py-2 bg-white/10 backdrop-blur-sm rounded text-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  {social.label}
-                </span>
-              </a>
-            ))}
-            <div className="w-px h-32 bg-gradient-to-t from-transparent via-gray-500 to-gray-300"></div>
-          </div>
-        </div>
-
         <div className="relative container mx-auto px-4 py-32 text-center">
+          <h1 className="font-space-grotesk text-4xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 text-transparent bg-clip-text animate-gradient tracking-tight">
+            Hi, I'm
+          </h1>
+          <br></br>
           <h1 className="font-space-grotesk text-6xl md:text-8xl font-bold mb-16 bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 text-transparent bg-clip-text animate-gradient tracking-tight">
-            Hi, I'm Pranshu Parashar
+            Pranshu Parashar
           </h1>
           <p
-            className={`font-inter text-2xl ${
+            className={`font-sans text-2xl ${
               isDarkMode ? "text-gray-300" : "text-gray-800"
-            } mb-16 h-8 font-light`}
+            } mb-16 font-medium flex flex-col md:flex-row items-center justify-center gap-2`}
           >
-            I am a{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500 font-medium">
-              {currentText}
-            </span>
-            <span className="animate-blink">|</span>
+            <span>I am a</span>
+            <RotatingText
+              texts={[
+                "Frontend Developer",
+                "Backend Developer",
+                "UI/UX Designer",
+                "Full Stack Developer",
+                "App Developer",
+              ]}
+              mainClassName={`inline-flex px-2 sm:px-2 md:px-3 overflow-hidden py-0.5 sm:py-1 md:py-2 rounded-lg font-bold text-2xl md:text-3xl ${
+                isDarkMode ? "bg-black text-white" : "bg-grey text-black"
+              } font-sans`}
+              staggerFrom={"last"}
+              initial={{ y: "100%" }}
+              animate={{ y: 0 }}
+              exit={{ y: "-120%" }}
+              staggerDuration={0.025}
+              splitLevelClassName="overflow-hidden pb-0.5 sm:pb-1 md:pb-1 font-sans"
+              transition={{ type: "spring", damping: 30, stiffness: 400 }}
+              rotationInterval={2000}
+            />
           </p>
 
-          {/* Mobile Social Links */}
-          <div className="lg:hidden flex justify-center gap-6 mt-12">
+          {/* Social Links (always at bottom, all views) */}
+          <div className="flex justify-center gap-6 mt-12">
             {socialLinks.map((social, index) => (
               <a
                 key={index}
                 href={social.link}
-                className={`group relative p-3 rounded-lg backdrop-blur-sm hover:bg-white/10 transform hover:scale-110 transition-all duration-300`}
+                className={`group relative p-3 rounded-lg backdrop-blur-sm hover:bg-white/10 transform hover:scale-110 transition-all duration-300 font-sans`}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={social.tooltip}
               >
                 <social.icon
-                  className={`h-6 w-6 ${
+                  className={`h-6 w-6 md:h-8 md:w-8 lg:h-8 lg:w-8 ${
                     isDarkMode ? "text-gray-400" : "text-gray-600"
                   } ${social.color} transition-colors duration-300`}
                 />
-                <span className="absolute -bottom-full left-1/2 -translate-x-1/2 px-2 py-1 bg-white/10 backdrop-blur-sm rounded text-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <span className="absolute -bottom-full left-1/2 -translate-x-1/2 px-2 py-1 bg-white/10 backdrop-blur-sm rounded text-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 font-sans">
                   {social.label}
                 </span>
               </a>
@@ -268,72 +226,97 @@ const App = () => {
         </div>
       </div>
 
-      {/* Add About Section right after Hero Section */}
-      {/* About Me Section */}
-      <section className="relative py-20 overflow-hidden">
-        <div
-          className={`absolute inset-0 ${
-            isDarkMode
-              ? "bg-gradient-to-b from-black via-zinc-900 to-black"
-              : "bg-gradient-to-b from-gray-100 via-gray-200 to-gray-100"
-          }`}
-        />
+      {/* About Me Section - Redesigned */}
+      <section className="relative py-32 overflow-hidden">
+        <div className="container mx-auto px-6 lg:px-8">
+          {/* Section Header */}
+          <div className=" mb-10">
+            <h2
+              className={`font-sans text-2xl lg:text-3xl font-bold tracking-tight mb-8 flex items-center gap-3 ${
+                isDarkMode ? "text-gray-300" : "text-gray-700"
+              }`}
+            >
+              <FaUserAstronaut className="text-purple-500 h-7 w-7" />
+              ABOUT
+            </h2>
+          </div>
 
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="flex flex-col lg:flex-row items-center gap-16">
-            {/* Profile Image */}
-            <div className="lg:w-1/3 flex justify-center">
-              <div className="relative group">
-                <div className="w-64 h-64 rounded-xl overflow-hidden ring-2 ring-gray-800 group-hover:ring-purple-500 transition-all duration-300">
-                  <img
-                    src="/favicon.jpg"
-                    alt="Pranshu Parashar"
-                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
-                  />
-                </div>
-                <div className="absolute -bottom-4 -right-4 bg-white/5 backdrop-blur-sm border border-gray-800 rounded-lg p-2 group-hover:scale-110 transition-transform duration-300">
-                  <AcademicCapIcon className="h-6 w-6 text-purple-400" />
+          {/* Content Layout */}
+          <div className="flex flex-col lg:flex-row items-center justify-center gap-16 lg:gap-24">
+            {/* Left Side - Images */}
+            <div className="flex flex-row gap-8 lg:gap-12 items-center justify-center">
+              {/* Responsive image layout: stack vertically on small screens, meet at edge on desktop */}
+              <div className="flex flex-col sm:flex-row gap-8 lg:gap-12 items-center justify-center">
+                {/* Force images side by side on all screens, scale responsively */}
+                <div className="flex flex-row gap-12 items-center justify-center w-full">
+                  {/* First Image - Portrait (tilted right) */}
+                  <div className="relative z-10 mr-[-20px] group">
+                    <img
+                      src="/favicon.jpg"
+                      alt="Portrait"
+                      className="w-[30vw] max-w-[120px] sm:max-w-[180px] md:max-w-[220px] lg:max-w-[230px] aspect-square object-cover rounded-lg shadow-[0_8px_32px_0_rgba(0,0,0,0.35)] transform rotate-[12deg] transition-all duration-300 group-hover:scale-105 group-hover:shadow-2xl"
+                      style={{ background: "#222" }}
+                    />
+                  </div>
+                  {/* Second Image - Action/Lifestyle (tilted left, meets at edge) */}
+                  <div className="relative z-20 ml-[-20px] group">
+                    <img
+                      src="/image.jpg"
+                      alt="Action"
+                      className="w-[30vw] max-w-[120px] sm:max-w-[180px] md:max-w-[220px] lg:max-w-[230px] aspect-square object-cover rounded-lg shadow-[0_8px_32px_0_rgba(0,0,0,0.35)] transform -rotate-[12deg] transition-all duration-300 group-hover:scale-105 group-hover:shadow-2xl"
+                      style={{ background: "#222" }}
+                    />
+                  </div>
                 </div>
               </div>
             </div>
 
-            {/* About Content */}
-            <div className="lg:w-2/3 space-y-6">
-              <h2 className="font-space-grotesk text-4xl font-bold tracking-tight bg-gradient-to-r from-blue-400 to-purple-500 text-transparent bg-clip-text">
-                About Me
-              </h2>
-
-              <div
-                className={`space-y-4 ${
-                  isDarkMode ? "text-gray-300" : "text-gray-800"
-                }`}
-              >
-                <p className="text-lg leading-relaxed">
-                  I'm{" "}
-                  <span className="font-medium text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">
-                    Pranshu Parashar
-                  </span>
-                  , a passionate Full Stack Developer creating innovative
-                  digital solutions.
+            {/* Right Side - Text Content */}
+            <div className="lg:w-1/2 space-y-8">
+              <div className="space-y-6">
+                <p
+                  className={`text-sm leading-relaxed font-sans ${
+                    isDarkMode ? "text-gray-300" : "text-gray-700"
+                  }`}
+                >
+                  I'm a self-taught full-stack developer who went from
+                  engineering lectures to building real-world web apps. I learn
+                  by doing—building projects, contributing to open source, and
+                  taking on impactful internships. I’m hooked on solving real
+                  problems through code and constantly pushing myself to grow.
                 </p>
-                <p className="text-lg leading-relaxed">
-                  Specializing in modern web technologies, I transform complex
-                  ideas into clean, efficient applications that solve real-world
-                  problems.
+                <p
+                  className={`text-sm leading-relaxed font-sans ${
+                    isDarkMode ? "text-gray-400" : "text-gray-700"
+                  }`}
+                >
+                  I'm here to build kickass products that solve real problems
+                  and make people's lives easier. I like keeping things simple,
+                  fast, and actually useful—while making sure they deliver real
+                  impact.
                 </p>
               </div>
-
-              {/* Resume Download Section */}
-              <div className="flex items-center space-x-4">
+              {/* Resume Download Button */}
+              <div className="pt-6">
                 <a
                   href="/PranshuParashar_Resume.pdf"
                   download
-                  className="group flex items-center gap-3 px-6 py-3 bg-white/5 backdrop-blur-sm border border-gray-800 rounded-lg hover:border-purple-500 transition-all duration-300"
+                  className={`inline-flex items-center gap-3 px-8 py-4 rounded-lg transition-all duration-300 border-2 font-sans
+                    ${
+                      isDarkMode
+                        ? "bg-transparent border-white/20 hover:border-white/40 hover:bg-white/5"
+                        : "bg-transparent border-gray-400 hover:border-gray-600 hover:bg-gray-100"
+                    }
+                  `}
                 >
-                  <DocumentDownloadIcon className="h-6 w-6 text-blue-400 group-hover:text-purple-500 transition-colors" />
+                  <DocumentDownloadIcon
+                    className={`h-6 w-6 ${
+                      isDarkMode ? "text-gray-300" : "text-gray-700"
+                    }`}
+                  />
                   <span
-                    className={`group-hover:text-white transition-colors  ${
-                      isDarkMode ? "text-gray-300" : "text-gray-800"
+                    className={`font-sans font-medium ${
+                      isDarkMode ? "text-gray-300" : "text-gray-700"
                     }`}
                   >
                     Download Resume
@@ -389,7 +372,7 @@ const App = () => {
 
                   {/* Project Description */}
                   <p
-                    className={`font-inter ${
+                    className={`font-sans ${
                       isDarkMode ? "text-gray-400" : "text-gray-600"
                     } mb-6 text-sm font-light leading-relaxed max-w-xl`}
                   >
@@ -416,7 +399,7 @@ const App = () => {
                     {project.tech.map((tech) => (
                       <span
                         key={tech}
-                        className={`font-inter px-2 py-1 text-xs ${
+                        className={`font-sans px-2 py-1 text-xs ${
                           isDarkMode ? "bg-white/10" : "bg-black/10"
                         } rounded-full font-medium`}
                       >
@@ -431,7 +414,7 @@ const App = () => {
                       href={project.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className={`inline-flex items-center gap-2 text-sm ${
+                      className={`inline-flex items-center gap-2 text-sm font-sans ${
                         isDarkMode
                           ? "text-gray-400 hover:text-white"
                           : "text-gray-600 hover:text-black"
@@ -448,7 +431,7 @@ const App = () => {
                       href={project.liveUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className={`inline-flex items-center justify-center gap-1 px-2 py-1 rounded-lg font-normal text-base transition-all duration-300 ${
+                      className={`inline-flex items-center justify-center gap-1 px-2 py-1 rounded-lg font-normal text-base font-sans transition-all duration-300 ${
                         isDarkMode
                           ? "bg-white/10 hover:bg-white/20 text-white border border-gray-700 hover:border-gray-600"
                           : "bg-black/10 hover:bg-black/20 text-black border border-gray-300 hover:border-gray-400"
@@ -500,7 +483,7 @@ const App = () => {
             ].map(({ tech, Icon }) => (
               <div
                 key={tech}
-                className={`font-inter group flex items-center gap-2 sm:gap-4 p-2 sm:p-3 rounded-lg border ${
+                className={`font-sans group flex items-center gap-2 sm:gap-4 p-2 sm:p-3 rounded-lg border ${
                   isDarkMode
                     ? "border-gray-800 hover:border-gray-600"
                     : "border-gray-200 hover:border-gray-400"
@@ -516,7 +499,7 @@ const App = () => {
                     isDarkMode
                       ? "text-gray-300 group-hover:text-white"
                       : "text-gray-700 group-hover:text-gray-900"
-                  } transition-colors duration-300 font-light`}
+                  } transition-colors duration-300 font-light font-sans`}
                 >
                   {tech}
                 </span>
