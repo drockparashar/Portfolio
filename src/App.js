@@ -1,11 +1,6 @@
 import React, { useState, useEffect } from "react";
 import {
   AcademicCapIcon,
-  MailIcon,
-  LinkIcon,
-  CodeIcon,
-  UserCircleIcon,
-  BadgeCheckIcon,
   ArrowUpIcon,
   DocumentDownloadIcon,
   TerminalIcon,
@@ -28,23 +23,23 @@ import {
   SiDocker,
   SiAwslambda,
   SiTensorflow,
-  SiD3Dotjs,
   SiPrisma,
   SiNodedotjs,
   SiRedux,
   SiGraphql,
 } from "react-icons/si";
-
+import { DiAtom } from "react-icons/di";
 import {
-  FaEnvelope,
   FaGithub,
   FaLinkedin,
   FaTwitter,
   FaInstagram,
+  FaEye,
+  FaProjectDiagram
 } from "react-icons/fa";
 
 const App = () => {
-  const [activeProject, setActiveProject] = useState(null);
+  const [, setActiveProject] = useState(null);
   const [scrollPosition, setScrollPosition] = useState(0);
   const [isDarkMode, setIsDarkMode] = useState(true);
 
@@ -62,33 +57,32 @@ const App = () => {
 
   const projects = [
     {
-      title: "Farm Automation System",
+      title: "Snippet Cove",
       description:
-        "IoT-driven polyhouse management with realtime monitoring for crop-specific optimization.",
-      tech: ["React Native", "Node.js", "MongoDB", "ESP32"],
-      github: "https://github.com/drockparashar/FarmAutomation-App",
+        "SnippetCove is a full-stack code snippet sharing platform enabling developers to discover, save, and share reusable code snippets across multiple programming languages with user profiles, activity tracking, and responsive design",
+      tech: ["Next.js", "Node.js", "OAuth"],
+      github: "https://github.com/drockparashar/snippetCove",
+      liveUrl: "https://snippet-cove.vercel.app/", // Add your live project URL here
+      image: "/SnippetCove.png", // Add your project image path here
       gradient: "from-green-500 via-blue-400 to-purple-500",
     },
     {
-      title: "Unity Docs",
-      description: "Realtime collaborative text editor",
-      tech: ["Quill.js", "Node.js", "Socket.IO", "MongoDB"],
-      github: "https://github.com/drockparashar/unity-docs",
-      gradient: "from-rose-500 via-red-400 to-orange-300",
+      title: "Test Me",
+      description: "Test Me is an AI-powered personalized learning platform designed to help students practice and improve their knowledge through dynamic tests and performance analytics. It leverages modern web technologies and AI to create an engaging and adaptive educational experience.",
+      tech: ["Node.js", "Gemini", "Express.js","Recharts.js"],
+      github: "https://github.com/drockparashar/test-me",
+      liveUrl: "https://test-me-eta.vercel.app/", // Add your live project URL here
+      image: "/TestMe.png", // Add your project image path here
+      gradient: "from-green-500 via-blue-400 to-purple-500",
     },
     {
-      title: "RecapTube Extension",
-      description: "Chrome extension to summarize YouTube videos",
-      tech: ["Node.js", "Gemini", "Express.js"],
+      title: "RecapTube Chrome Extension",
+      description: "RecapTube is a Chrome extension that summarizes YouTube video transcripts. It allows you to quickly get a summary of a video without watching the entire content.",
+      tech: ["Node.js", "Express.js", "Gemini"],
       github: "https://github.com/drockparashar/recapTube-extension",
-      gradient: "from-emerald-500 via-teal-400 to-cyan-300",
-    },
-    {
-      title: "Git Deployer",
-      description: "Effortlessly launch your react creations onto the web",
-      tech: ["Node.js", "Redis", "S3", "TypeScript"],
-      github: "https://github.com/drockparashar/git-deployer",
-      gradient: "from-emerald-500 via-teal-400 to-cyan-300",
+      liveUrl: "https://github.com/drockparashar/recapTube-extension", // Add your live project URL here
+      image: "/RecapTube.png", // Add your project image path here
+      gradient: "from-green-500 via-blue-400 to-purple-500",
     },
   ];
 
@@ -351,7 +345,7 @@ const App = () => {
         </div>
       </section>
 
-      {/* About Section */}
+      {/* Projects Section */}
       <section id="projects" className="py-20 relative overflow-hidden">
         <div
           className={`absolute inset-0 ${
@@ -361,62 +355,107 @@ const App = () => {
           }`}
         />
         <div className="container mx-auto px-4 relative">
-          <h2 className="font-space-grotesk text-4xl font-bold mb-12 flex items-center tracking-tight">
-            <CodeIcon className="mr-4 text-purple-500 h-8 w-8" />
+          <h2 className="font-space-grotesk text-3xl font-bold mb-12 flex justify-center items-center tracking-tight">
+            <FaProjectDiagram className="mr-4 text-purple-500 h-8 w-8" />
             My Projects
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 lg:gap-8">
+          <div className="max-w-2xl mx-auto space-y-12">
             {projects.map((project, index) => (
               <div
                 key={project.title}
-                className="group relative overflow-hidden rounded-xl transition-all duration-500 hover:scale-[1.02]"
+                className="group relative transition-all duration-500"
                 onMouseEnter={() => setActiveProject(index)}
                 onMouseLeave={() => setActiveProject(null)}
               >
-                <div className="absolute inset-0 bg-gradient-to-r opacity-0 group-hover:opacity-10 transition-opacity duration-500" />
-                <div
-                  className={`relative p-6 sm:p-8 backdrop-blur-sm ${
-                    isDarkMode
-                      ? "bg-white/5 border border-gray-800"
-                      : "bg-black/5 border border-gray-200"
-                  } rounded-xl`}
-                >
+                <div className={`relative pl-6 flex flex-col`}>
+                  {/* Project Icon */}
+                  <div className="absolute -left-3 top-0 z-10">
+                    <DiAtom
+                      className={`h-8 w-8 ${
+                        isDarkMode ? "text-gray-400" : "text-gray-600"
+                      } group-hover:text-purple-400 transition-colors duration-300`}
+                    />
+                  </div>
+
+                  {/* Left vertical line - starts from bottom of icon */}
                   <div
-                    className={`absolute bottom-0 left-0 h-1 bg-gradient-to-r ${project.gradient} transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left`}
+                    className={`absolute left-0 top-8 w-0.5 h-full bg-gradient-to-b ${project.gradient} opacity-30 group-hover:opacity-100 transition-opacity duration-500`}
                   />
-                  <h3 className="font-space-grotesk text-xl sm:text-2xl font-bold mb-3 sm:mb-4 tracking-tight">
+
+                  {/* Project Title */}
+                  <h3 className="font-space-grotesk text-xl sm:text-2xl font-bold mb-3 tracking-tight">
                     {project.title}
                   </h3>
+
+                  {/* Project Description */}
                   <p
                     className={`font-inter ${
-                      isDarkMode ? "text-gray-300" : "text-gray-700"
-                    } mb-4 text-sm sm:text-base font-light leading-relaxed`}
+                      isDarkMode ? "text-gray-400" : "text-gray-600"
+                    } mb-6 text-sm font-light leading-relaxed max-w-xl`}
                   >
                     {project.description}
                   </p>
-                  <div className="flex flex-wrap gap-3 mb-6">
+
+                  {/* Project Image */}
+                  <div className="mb-6 rounded-lg overflow-hidden max-w-xl">
+                    <a
+                      href={project.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <img
+                        src={project.image}
+                        alt={project.title}
+                        className="w-full h-48 sm:h-80 object-cover rounded-lg transition-transform duration-300 group-hover:scale-[1.02] shadow-xl"
+                      />
+                    </a>
+                  </div>
+
+                  {/* Tech Stack Tags */}
+                  <div className="flex flex-wrap gap-2 mb-6">
                     {project.tech.map((tech) => (
                       <span
                         key={tech}
-                        className={`font-inter px-3 py-1 text-sm ${
-                          isDarkMode ? "bg-white/5" : "bg-black/5"
+                        className={`font-inter px-2 py-1 text-xs ${
+                          isDarkMode ? "bg-white/10" : "bg-black/10"
                         } rounded-full font-medium`}
                       >
                         {tech}
                       </span>
                     ))}
                   </div>
-                  <div className="flex gap-4">
+
+                  {/* GitHub Code Link */}
+                  <div className="mb-6">
                     <a
                       href={project.github}
-                      className={`flex items-center gap-2 ${
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`inline-flex items-center gap-2 text-sm ${
                         isDarkMode
-                          ? "text-gray-300 hover:text-white"
-                          : "text-gray-700 hover:text-black"
-                      } group`}
+                          ? "text-gray-400 hover:text-white"
+                          : "text-gray-600 hover:text-black"
+                      } transition-colors duration-300`}
                     >
-                      <LinkIcon className="h-6 w-6 transform group-hover:rotate-12 transition-transform duration-300" />
-                      Code
+                      <FaGithub className="h-4 w-4" />
+                      View Code
+                    </a>
+                  </div>
+
+                  {/* View Project Button */}
+                  <div>
+                    <a
+                      href={project.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`inline-flex items-center justify-center gap-1 px-2 py-1 rounded-lg font-normal text-base transition-all duration-300 ${
+                        isDarkMode
+                          ? "bg-white/10 hover:bg-white/20 text-white border border-gray-700 hover:border-gray-600"
+                          : "bg-black/10 hover:bg-black/20 text-black border border-gray-300 hover:border-gray-400"
+                      } group-hover:transform group-hover:scale-105 min-w-[160px]`}
+                    >
+                      <FaEye className="h-4 w-4" />
+                      View Project
                     </a>
                   </div>
                 </div>
