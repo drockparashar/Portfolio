@@ -133,7 +133,7 @@ const App = () => {
           : "bg-gradient-to-b from-gray-100 via-gray-200 to-gray-100 text-black"
       } overflow-x-hidden font-sans`}
     >
-      
+
       {scrollPosition > 500 && (
         <button
           onClick={scrollToTop}
@@ -143,7 +143,6 @@ const App = () => {
         </button>
       )}
 
-      {/* Theme Toggle Button */}
       <button
         onClick={toggleTheme}
         className="fixed top-8 right-8 p-3 rounded-full bg-white/10 backdrop-blur-sm border border-gray-800 hover:border-purple-500 transition-all duration-300 z-50"
