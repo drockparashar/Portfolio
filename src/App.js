@@ -133,7 +133,7 @@ const App = () => {
           : "bg-gradient-to-b from-gray-100 via-gray-200 to-gray-100 text-black"
       } overflow-x-hidden font-sans`}
     >
-      {/* Scroll to top button */}
+      
       {scrollPosition > 500 && (
         <button
           onClick={scrollToTop}
